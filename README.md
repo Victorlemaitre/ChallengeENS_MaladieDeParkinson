@@ -63,7 +63,7 @@ My main approach was using a Transformer architecture using time point as tokens
 
 To embedd our input we start with a large vector made of the concatenated time points and some padding. 
 This vector is of shape : 
-*\[ batch_size, context_length$\times$nb_features  \]*
+*\[ batch_size, context_length×nb_features  \]*
 
 We reshape it into :  
 *\[ batch_size, context_length, nb_features  ]*
@@ -87,9 +87,12 @@ Using this approach I could score a bit under 9 in my validation set.
 
 #### Ensembling :
 
-To further improve my model I used deep ensembling. With 20 model trained independently I could lower my error down to ... However the training time were getting prohibitive therefore I tried several approaches to speed up the process. 
+To further improve my model I used deep ensembling. With 30 model trained independently I could lower my error down to 7.35 . This allowed me to score a second place (as of 25/05/2025). 
+
 
 ##### What failed : 
+
+A lot (most) of what I tried failed. Here is a litany of some of my most interesting failures. 
 
 As I said deep ensembling gave better results but was too time-consuming. I thought this was due to the serial way I trained the models (one after the other) therefore I tried to paralellize the whole process of training the models into training a single big model where I would strategically block the flow of information via masks to simulate differents smaller models being trained. This, sadly, did not achieve any noticeable time reduction. 
 
