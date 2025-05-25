@@ -18,11 +18,11 @@ The data consists of ~55000 rows with the following 12 columns describing the pa
 	- OFF score (a biased clinical measurement which is not available most of the time)
 
 *a visual illustration of what On and Off state corresponds to*
-![[Images/Pasted image 20250521153328.png]]
+![](Images/image2.png)
 
 
 A single patient usually corresponds to multiple rows which allow us to model the progression of their disease. The goal is to predict the unbiased OFF score, represented here by the blue trajectory.
-![[Images/Pasted image 20250428120534.png]]
+![](Images/image1.png)
 
 The main difficulty concerning this dataset came from the abundance of null values, as you can see from the row null_count in the following high level description of the dataset.
 
@@ -104,7 +104,7 @@ Unfortunately I did not notice the same performance gains as deep ensembling so 
 
 
 Taking inspiration from [SAINT](https://arxiv.org/pdf/2106.01342) I implemented their intersample attention block.
-![[Images/Pasted image 20250522160828.png]]
+![](Images/image4.png)
 I thought that looking at other sample could communicate valuable information to the model by knowing for instance if someone is an outlier on certain features. This turned out to not be the case. 
 
 
@@ -113,7 +113,7 @@ I thought that looking at other sample could communicate valuable information to
  
 
 I tried to get rid of normalization altogether following the paper [Transformer without normalization](https://arxiv.org/pdf/2503.10622). Their work starts from the realization that empirically the LayerNorm functions act like tanh.
-![[Images/Pasted image 20250522144622.png]]
+![](Images/image3.png)
 They propose a new normalization function which they call, dynamic tanh and consists of : 
 $$DyT(x) = \gamma * \tanh(\alpha x) + \beta $$
 In practice I found that training with dynamic tanh was very unstable and depended a lot on the initialization of $\alpha$ . I did not notice any gain therefore I gave up on this idea. 
